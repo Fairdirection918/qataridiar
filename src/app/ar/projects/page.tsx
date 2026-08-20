@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InteriorPageView } from "@/components/sites/www-qataridiar-com-24dfe100/shared/InteriorPageView";
 import { PAGES } from "@/components/sites/www-qataridiar-com-24dfe100/shared/content";
-import { NOINDEX } from "@/lib/seo";
 
 const PAGE_KEY = "ar-projects";
 
 export const metadata: Metadata = {
-  title: "مشاريعنا | QatariDiar",
-  description: "مشاريعنا هي مشاريع بارزة ومهمة لا مثيل لها في كثير من الأحيان من حيث الحجم والنطاق والرؤية. تسعى تطوراتنا إلى رعاية نمو المجتمعات المحلية بشكل شامل وتوفير فرص ا",
-  robots: NOINDEX,
+  title: "مشاريع الديار القطرية",
+  description:
+    "تصفح مشاريع الديار القطرية حول العالم، وتعرّف على مشاريعها في مصر بالساحل الشمالي والقاهرة الجديدة والجيزة، مع فير دايركشن الوكيل المعتمد.",
+  alternates: { canonical: "/ar/projects/" },
 };
 
 export default function Page() {

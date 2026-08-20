@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InteriorPageView } from "@/components/sites/www-qataridiar-com-24dfe100/shared/InteriorPageView";
 import { PAGES } from "@/components/sites/www-qataridiar-com-24dfe100/shared/content";
-import { NOINDEX } from "@/lib/seo";
 
 const PAGE_KEY = "ar-media";
 
 export const metadata: Metadata = {
-  title: "المركز الإعلامي | QatariDiar",
-  description: "آخر الأخبار والبيانات الصحفية عن شركة الديار القطرية",
-  robots: NOINDEX,
+  title: "المركز الإعلامي",
+  description:
+    "آخر الأخبار والبيانات الصحفية عن شركة الديار القطرية، مقدَّمة من فير دايركشن، الوكيل المعتمد لمشاريعها العقارية في مصر.",
+  alternates: { canonical: "/ar/media/" },
 };
 
 export default function Page() {

@@ -12,11 +12,11 @@ import { PageShell } from "@/components/sites/www-qataridiar-com-24dfe100/shared
 import { LandingDisclosure } from "@/components/sites/www-qataridiar-com-24dfe100/shared/LandingDisclosure";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { OG_LOCALE, SITE_NAME } from "@/lib/site";
-import { faqSchema, organizationSchema, websiteSchema } from "@/lib/schema";
+import { faqSchema, websiteSchema } from "@/lib/schema";
 
-const TITLE = "الديار القطرية مصر | مشاريع عقارية في القاهرة والساحل الشمالي";
+const TITLE = "مشاريع عقارية في القاهرة والساحل الشمالي";
 const DESCRIPTION =
-  "تُواصل الديار القطرية استثمارها في سوق العقارات في مصر بمحفظة تتجاوز 40 مليون متر مربع. سجّل اهتمامك وسيتواصل معك فريق المبيعات.";
+  "فير دايركشن، الوكيل المعتمد لمشاريع الديار القطرية في مصر بمحفظة تتجاوز 40 مليون متر مربع بالقاهرة والساحل الشمالي والجيزة. سجّل اهتمامك وسيتواصل معك فريق المبيعات.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -43,7 +43,6 @@ export default function Home() {
   return (
     // gac footer marker: {/* gac:start:footer-ar */}{/* gac:end:footer-ar */}
     <PageShell>
-      <JsonLd data={organizationSchema()} />
       <JsonLd data={websiteSchema()} />
       <JsonLd data={faqSchema(FAQS)} />
       <EgyptHero />

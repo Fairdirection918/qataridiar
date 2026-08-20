@@ -8,15 +8,15 @@ import { StatsIntro } from "@/components/sites/www-qataridiar-com-24dfe100/ar-75
 import { VideoSection } from "@/components/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/VideoSection";
 import { PageShell } from "@/components/sites/www-qataridiar-com-24dfe100/shared/PageShell";
 import { LandingDisclosure } from "@/components/sites/www-qataridiar-com-24dfe100/shared/LandingDisclosure";
-import { NOINDEX } from "@/lib/seo";
 
 const PATTERN =
   "/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/images/pattern-upper-content.svg";
 
 export const metadata: Metadata = {
-  title: "الديار القطرية | QatariDiar",
-  description: "التميز الملهم في العقارات",
-  robots: NOINDEX,
+  title: "الديار القطرية مصر",
+  description:
+    "فير دايركشن، الوكيل المعتمد لمشاريع الديار القطرية في مصر. تصفح علم الروم بالساحل الشمالي، وسيتي جيت القاهرة الجديدة، ونيو جيزا، وسانت ريجيس القاهرة.",
+  alternates: { canonical: "/ar/" },
 };
 
 export default function ArHome() {

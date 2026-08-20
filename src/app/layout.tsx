@@ -4,7 +4,9 @@ import Script from "next/script";
 import { InquiryPopup } from "@/components/inquiry-popup";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { CookieNotice } from "@/components/sites/www-qataridiar-com-24dfe100/shared/CookieNotice";
-import { SITE_URL } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema } from "@/lib/schema";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const almarai = Almarai({
@@ -17,10 +19,11 @@ const almarai = Almarai({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "الديار القطرية مصر | مشاريع عقارية في القاهرة والساحل الشمالي",
-    template: "%s | الديار القطرية مصر",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "التميز الملهم في العقارات",
+  description:
+    "فير دايركشن وكيل مبيعات معتمد لمشاريع الديار القطرية العقارية في مصر. تصفح مشاريع القاهرة الجديدة والجيزة والساحل الشمالي، وتواصل مع فريق المبيعات.",
   verification: {
     google: "FuK1gRCluAQ2YMkLhA8amyW52Lv4Us8JwcaULfjW5rc",
   },
@@ -89,6 +92,9 @@ export default function RootLayout({
             src="https://www.facebook.com/tr?id=844936298585723&ev=PageView&noscript=1"
           />
         </noscript>
+        {/* gac:start:organization-schema */}
+        <JsonLd data={organizationSchema()} />
+        {/* gac:end:organization-schema */}
       </body>
     </html>
   );

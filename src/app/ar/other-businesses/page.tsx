@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InteriorPageView } from "@/components/sites/www-qataridiar-com-24dfe100/shared/InteriorPageView";
 import { PAGES } from "@/components/sites/www-qataridiar-com-24dfe100/shared/content";
-import { NOINDEX } from "@/lib/seo";
 
 const PAGE_KEY = "ar-other-businesses";
 
 export const metadata: Metadata = {
-  title: "أعمال أخرى | QatariDiar",
-  description: "بالإضافة إلى الأعمال الأساسية لشركة الديار القطرية في مجال التطوير العقاري، تم إنشاء شركات لدعم رؤية الشركة منها شركات متخصصة في البناء وتكوين البنية التحتية، و",
-  robots: NOINDEX,
+  title: "أعمال الديار القطرية الأخرى",
+  description:
+    "الشركات التابعة لمجموعة الديار القطرية في مجالات البناء والبنية التحتية، المطوّر العقاري لمشاريع فير دايركشن المعتمدة في مصر.",
+  alternates: { canonical: "/ar/other-businesses/" },
 };
 
 export default function Page() {

@@ -21,13 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject(slug);
   if (!project) return { title: "Project | QatariDiar", robots: NOINDEX };
 
-  const isIndexable = (INDEXABLE_PROJECT_SLUGS as readonly string[]).includes(slug);
   const title = project.title;
   const description = project.summary || project.paragraphs[0] || project.title;
 
-  if (!isIndexable) {
+  if (!(INDEXABLE_PROJECT_SLUGS as readonly string[]).includes(slug)) {
     return {
-      title: project.documentTitle || `${project.title} | QatariDiar`,
+      title: project.documentTitle || `${project.title} | ${SITE_NAME}`,
       description,
       robots: NOINDEX,
     };

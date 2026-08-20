@@ -18,7 +18,7 @@ export function organizationSchema() {
       addressCountry: "EG",
     },
     description:
-      "Fair Direction (الاتجاه العادل) is an independent, authorized sales agent for Qatar Diar (الديار القطرية) properties. It is not affiliated with, endorsed by, or the official website of Qatar Diar.",
+      "Fair Direction is an independent, authorized real estate sales agent for Qatar Diar properties. Not affiliated with or the official website of Qatar Diar.",
   };
 }
 

@@ -6,15 +6,14 @@ import { InteriorBanner } from "@/components/sites/www-qataridiar-com-24dfe100/s
 import { LandingDisclosure } from "@/components/sites/www-qataridiar-com-24dfe100/shared/LandingDisclosure";
 import { PageShell } from "@/components/sites/www-qataridiar-com-24dfe100/shared/PageShell";
 import { PAGES } from "@/components/sites/www-qataridiar-com-24dfe100/shared/content";
-import { NOINDEX } from "@/lib/seo";
 
 const PAGE_KEY = "ar-contact-us";
 
 export const metadata: Metadata = {
-  title: "Contact Us | QatariDiar",
+  title: "تواصل معنا",
   description:
-    "We welcome your inquiries. Please fill out the form or contact us by phone or email.",
-  robots: NOINDEX,
+    "تواصل مع فير دايركشن، الوكيل المعتمد لمشاريع الديار القطرية في مصر، عبر النموذج أو الهاتف أو البريد الإلكتروني للاستفسار عن المشاريع وخطط السداد.",
+  alternates: { canonical: "/ar/contact-us/" },
 };
 
 export default function Page() {
