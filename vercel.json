@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://qataridiar.dev/:path*",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "www.qataridiar.dev" }]
+    }
+  ]
+}
