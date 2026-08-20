@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     template: "%s | الديار القطرية مصر",
   },
   description: "التميز الملهم في العقارات",
+  verification: {
+    google: "FuK1gRCluAQ2YMkLhA8amyW52Lv4Us8JwcaULfjW5rc",
+  },
 };
 
 export default function RootLayout({
