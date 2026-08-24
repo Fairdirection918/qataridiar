@@ -922,3 +922,13 @@
 .iti--fullscreen-popup {
   z-index: 1200;
 }
+/* The dropdown inherits the page's white text — force dark-on-light. */
+.iti__country-selector,
+.iti__country-selector .iti__country,
+.iti__country-selector .iti__country-name,
+.iti__country-selector .iti__dial-code,
+.iti__country-selector .iti__search-input,
+.iti__dropdown-content,
+.iti__dropdown-content .iti__country {
+  color: #201747;
+}
