@@ -5,7 +5,7 @@ import { InquiryPopup } from "@/components/inquiry-popup";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { CookieNotice } from "@/components/sites/www-qataridiar-com-24dfe100/shared/CookieNotice";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationSchema } from "@/lib/schema";
+import { organizationSchema, realEstateAgentSchema } from "@/lib/schema";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -94,6 +94,7 @@ export default function RootLayout({
         </noscript>
         {/* gac:start:organization-schema */}
         <JsonLd data={organizationSchema()} />
+        <JsonLd data={realEstateAgentSchema()} />
         {/* gac:end:organization-schema */}
       </body>
     </html>

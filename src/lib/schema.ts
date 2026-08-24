@@ -10,6 +10,7 @@ export function organizationSchema() {
     url: SITE_URL,
     email: "operation@fairdirection.com",
     telephone: "+20 1515124909",
+    areaServed: "EG",
     address: {
       "@type": "PostalAddress",
       streetAddress: "124 Othman Ibn Affan St, Floor 7, Apartment 73",
@@ -17,8 +18,43 @@ export function organizationSchema() {
       addressRegion: "Cairo",
       addressCountry: "EG",
     },
+    knowsAbout: [
+      "Qatar Diar Real Estate",
+      "Simaisma Qatar Diar",
+      "St. Regis Marsa Arabia",
+      "Luxury Real Estate Egypt",
+    ],
     description:
-      "Fair Direction is an independent, authorized real estate sales agent for Qatar Diar properties. Not affiliated with or the official website of Qatar Diar.",
+      "Fair Direction is an independent, authorized real estate sales agent for Qatar Diar properties in Egypt. Not affiliated with or the official website of Qatar Diar Real Estate Investment Company.",
+  };
+}
+
+export function realEstateAgentSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "@id": `${SITE_URL}/#realestate-agent`,
+    name: "Fair Direction – Authorized Sales Agent for Qatar Diar",
+    alternateName: "الاتجاه العادل",
+    url: SITE_URL,
+    email: "operation@fairdirection.com",
+    telephone: "+20 1515124909",
+    areaServed: "EG",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "124 Othman Ibn Affan St, Floor 7, Apartment 73",
+      addressLocality: "New Cairo",
+      addressRegion: "Cairo",
+      addressCountry: "EG",
+    },
+    knowsAbout: [
+      "Qatar Diar Real Estate",
+      "Simaisma Qatar Diar",
+      "St. Regis Marsa Arabia",
+      "Luxury Real Estate Egypt",
+    ],
+    description:
+      "Fair Direction is an independent, authorized real estate sales agent for Qatar Diar Real Estate Investment Company. We market and sell Qatar Diar properties in Egypt. Not affiliated with or the official website of Qatar Diar.",
   };
 }
 
