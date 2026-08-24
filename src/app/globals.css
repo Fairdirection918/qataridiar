@@ -914,3 +914,10 @@
     text-align: center;
   }
 }
+.iti {
+  width: 100%;
+}
+.iti__dropdown-content,
+.iti--fullscreen-popup {
+  z-index: 1200;
+}

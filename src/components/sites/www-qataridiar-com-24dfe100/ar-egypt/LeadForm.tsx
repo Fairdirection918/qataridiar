@@ -1,39 +1,22 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
+import { PhoneField, type PhoneFieldHandle } from "@/components/PhoneField";
 import { FORM_COPY, LEAD_API_URL, LEAD_PROVIDER } from "./data";
 
 type Variant = "glass" | "solid";
-
-/**
- * Egyptian mobile numbers are 010/011/012/015 + 8 digits. Accepts the number
- * with or without the +20 country code or the leading national 0.
- */
-function normalizePhone(raw: string) {
-  let digits = raw.replace(/\D/g, "");
-  if (digits.startsWith("0020")) digits = digits.slice(4);
-  if (digits.startsWith("20") && digits.length > 10) digits = digits.slice(2);
-  if (digits.startsWith("0")) digits = digits.slice(1);
-  return digits;
-}
-
-const isValidPhone = (raw: string) => /^1[0125]\d{8}$/.test(normalizePhone(raw));
 
 interface Errors {
   name?: string;
   phone?: string;
 }
 
-function validate(name: string, phone: string): Errors {
+function validate(name: string): Errors {
   const errors: Errors = {};
   const trimmed = name.trim();
   if (!trimmed) errors.name = FORM_COPY.errors.nameRequired;
   else if (trimmed.length < 3) errors.name = FORM_COPY.errors.nameShort;
-
-  if (!phone.trim()) errors.phone = FORM_COPY.errors.phoneRequired;
-  else if (!isValidPhone(phone)) errors.phone = FORM_COPY.errors.phoneInvalid;
-
   return errors;
 }
 
@@ -43,7 +26,7 @@ async function submitLead(name: string, phone: string) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       name: name.trim(),
-      phone: `+20${normalizePhone(phone)}`,
+      phone,
       provider: LEAD_PROVIDER,
     }),
   });
@@ -107,30 +90,36 @@ export function LeadForm({
   const phoneId = `${uid}-phone`;
 
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
   const [pending, setPending] = useState(false);
   const [sentName, setSentName] = useState("");
   const [submitError, setSubmitError] = useState("");
+  const phoneFieldRef = useRef<PhoneFieldHandle>(null);
 
   // Re-validate on every keystroke only once the user has tried to submit, so
   // errors never appear before the first attempt.
-  const revalidate = (nextName: string, nextPhone: string) => {
-    if (submitted) setErrors(validate(nextName, nextPhone));
+  const revalidate = (nextName: string) => {
+    if (submitted) setErrors(validate(nextName));
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    const found = validate(name, phone);
+    const found = validate(name);
     setErrors(found);
     if (Object.keys(found).length > 0) return;
+
+    const check = await phoneFieldRef.current?.validate();
+    if (!check || !check.valid) {
+      setErrors((prev) => ({ ...prev, phone: check ? check.message : FORM_COPY.errors.phoneInvalid }));
+      return;
+    }
 
     setSubmitError("");
     setPending(true);
     try {
-      await submitLead(name, phone);
+      await submitLead(name, check.number);
       setSentName(name.trim().split(/\s+/)[0]);
       trackMetaEvent("Lead");
     } catch {
@@ -196,7 +185,7 @@ export function LeadForm({
           value={name}
           onChange={(e) => {
             setName(e.target.value);
-            revalidate(e.target.value, phone);
+            revalidate(e.target.value);
           }}
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? `${nameId}-error` : undefined}
@@ -214,35 +203,17 @@ export function LeadForm({
           {FORM_COPY.phoneLabel} *
         </label>
         {/* Forced LTR so the number and its country code read in dial order. */}
-        <div dir="ltr" className="flex">
-          <span
-            className={`flex shrink-0 items-center border px-[14px] text-[15px] ${s.prefix}`}
-            aria-hidden="true"
-          >
-            +20
-          </span>
-          <input
-            id={phoneId}
-            name="phone"
-            type="tel"
-            inputMode="numeric"
-            autoComplete="tel"
-            placeholder={FORM_COPY.phonePlaceholder}
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-              revalidate(name, e.target.value);
-            }}
-            aria-invalid={Boolean(errors.phone)}
-            aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
-            className={`${fieldClass(Boolean(errors.phone))} border-l-0`}
-          />
-        </div>
-        {errors.phone ? (
-          <p id={`${phoneId}-error`} className={`mt-[6px] text-[13px] ${s.error}`}>
-            {errors.phone}
-          </p>
-        ) : null}
+        <PhoneField
+          ref={phoneFieldRef}
+          id={phoneId}
+          locale="ar"
+          disabled={pending}
+          containerClassName={`w-full px-[14px] py-[13px] text-[15px] outline-none transition-colors ${s.field} ${
+            errors.phone ? s.fieldError : ""
+          }`}
+          inputClassName="w-full bg-transparent text-[15px] outline-none disabled:opacity-50"
+          errorClassName={`mt-[6px] text-[13px] ${s.error}`}
+        />
       </div>
 
       {submitError ? (
