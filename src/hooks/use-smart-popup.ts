@@ -4,29 +4,24 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "smart-popup:shown";
 const SUBMITTED_KEY = "qd_lead_popup_submitted";
-const IDLE_DELAY_MS = 30_000;
-const SCROLL_THRESHOLD = 0.5;
+const SHOW_DELAY_MS = 4_000;
 
 interface UseSmartPopupOptions {
-  /** Minimum time on page (ms) before the scroll-based fallback can fire. */
-  idleDelayMs?: number;
-  /** Minimum scroll depth (0-1) required for the fallback trigger. */
-  scrollThreshold?: number;
+  /** Time on page (ms) before the popup fires. */
+  showDelayMs?: number;
   /** sessionStorage key used to guarantee a once-per-session show. */
   storageKey?: string;
 }
 
 /**
- * Fires once per session on either desktop exit-intent (cursor leaving toward
- * the tab bar) or, as a mobile-safe fallback, once the visitor has spent
- * `idleDelayMs` on the page and scrolled past `scrollThreshold`.
+ * Fires once per session shortly after the visitor lands (or earlier on
+ * desktop exit-intent). Suppressed permanently once a lead was captured.
  * Any element with `data-popup-suppress` cancels the popup for the session
  * when clicked, so visitors who already found their way to a contact link
  * aren't interrupted.
  */
 export function useSmartPopup({
-  idleDelayMs = IDLE_DELAY_MS,
-  scrollThreshold = SCROLL_THRESHOLD,
+  showDelayMs = SHOW_DELAY_MS,
   storageKey = STORAGE_KEY,
 }: UseSmartPopupOptions = {}) {
   const [open, setOpen] = useState(false);
@@ -36,12 +31,6 @@ export function useSmartPopup({
     if (localStorage.getItem(SUBMITTED_KEY) === "1") return;
 
     let fired = false;
-    let timeElapsed = false;
-
-    const scrollDepth = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      return max > 0 ? window.scrollY / max : 0;
-    };
 
     const fire = () => {
       if (fired) return;
@@ -60,34 +49,25 @@ export function useSmartPopup({
       if (event.clientY <= 0 && !event.relatedTarget) fire();
     };
 
-    const onScroll = () => {
-      if (timeElapsed && scrollDepth() >= scrollThreshold) fire();
-    };
-
     const onClick = (event: MouseEvent) => {
       if ((event.target as HTMLElement | null)?.closest("[data-popup-suppress]")) {
         suppress();
       }
     };
 
-    const timer = setTimeout(() => {
-      timeElapsed = true;
-      if (scrollDepth() >= scrollThreshold) fire();
-    }, idleDelayMs);
+    const timer = setTimeout(fire, showDelayMs);
 
     function cleanup() {
       document.removeEventListener("mouseout", onMouseOut);
       document.removeEventListener("click", onClick);
-      window.removeEventListener("scroll", onScroll);
       clearTimeout(timer);
     }
 
     document.addEventListener("mouseout", onMouseOut);
     document.addEventListener("click", onClick);
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     return cleanup;
-  }, [idleDelayMs, scrollThreshold, storageKey]);
+  }, [showDelayMs, storageKey]);
 
   return [open, setOpen] as const;
 }
