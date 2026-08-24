@@ -116,6 +116,48 @@ export function ProjectDetailView({ project }: { project: ProjectDetail }) {
               </div>
             </div>
           ) : null}
+
+          {project.sections?.length ? (
+            <div className="mt-[60px] max-w-[820px] space-y-[40px]">
+              {project.sections.map((s) => (
+                <div key={s.heading}>
+                  <h2 className="mb-[18px] text-[24px] font-bold text-qd-navy">
+                    {s.heading}
+                  </h2>
+                  <div className="space-y-[18px]">
+                    {s.paragraphs.map((p) => (
+                      <p
+                        key={p.slice(0, 48)}
+                        className="text-[16px] leading-[28px] text-qd-text"
+                      >
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {project.faqs?.length ? (
+            <div className="mt-[60px] max-w-[820px]">
+              <h2 className="mb-[24px] text-[28px] font-bold text-qd-navy">
+                الأسئلة الشائعة
+              </h2>
+              <div className="space-y-[24px]">
+                {project.faqs.map((f) => (
+                  <div key={f.question}>
+                    <h3 className="mb-[8px] text-[16px] font-bold text-qd-navy">
+                      {f.question}
+                    </h3>
+                    <p className="text-[16px] leading-[28px] text-qd-text">
+                      {f.answer}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </Container>
       </section>
 

@@ -80,6 +80,8 @@ export interface ProjectDetail {
   paragraphs: string[];
   gallery: { src: string; alt: string }[];
   website: string;
+  sections?: { heading: string; paragraphs: string[] }[];
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface MediaCard {
