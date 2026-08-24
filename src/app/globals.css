@@ -917,6 +917,7 @@
 .iti {
   width: 100%;
 }
+.iti__country-selector,
 .iti__dropdown-content,
 .iti--fullscreen-popup {
   z-index: 1200;

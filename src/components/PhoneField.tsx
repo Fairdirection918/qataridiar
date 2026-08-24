@@ -85,7 +85,6 @@ export function PhoneField({
       strictMode: true,
       allowedNumberTypes: ["MOBILE"],
       placeholderNumberType: "MOBILE",
-      dropdownParent: document.body,
       countryNameLocale: locale,
       loadUtils: () => import("intl-tel-input/utils"),
     });
