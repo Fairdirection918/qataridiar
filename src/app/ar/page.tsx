@@ -13,7 +13,7 @@ const PATTERN =
   "/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/images/pattern-upper-content.svg";
 
 export const metadata: Metadata = {
-  title: "الديار القطرية مصر",
+  title: "نظرة عامة على مشاريعنا وأخبارنا",
   description:
     "فير دايركشن، الوكيل المعتمد لمشاريع الديار القطرية في مصر. تصفح علم الروم بالساحل الشمالي، وسيتي جيت القاهرة الجديدة، ونيو جيزا، وسانت ريجيس القاهرة.",
   alternates: { canonical: "/ar/" },

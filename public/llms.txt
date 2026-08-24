@@ -1,0 +1,20 @@
+# Fair Direction — qataridiar.dev
+
+> Fair Direction is an independent, authorized sales agent for Qatar Diar Real Estate Investment Company. This site is not the official Qatar Diar website. Fair Direction markets Qatar Diar's Egypt portfolio — Alam Al Roum (North Coast), St. Regis Cairo & Residences, City Gate New Cairo, and NewGiza — and provides inquiry/contact services for prospective buyers.
+
+## Pages
+
+- [Home](https://www.qataridiar.dev/): Alam Al Roum spotlight and Egypt portfolio overview — register interest.
+- [Overview (Arabic)](https://www.qataridiar.dev/ar/): Portfolio overview, featured project, news, and other Qatar Diar businesses.
+- [About Us](https://www.qataridiar.dev/ar/about-us/): About Qatar Diar and Fair Direction's role as an authorized sales agent.
+- [Projects](https://www.qataridiar.dev/ar/projects/): Qatar Diar's global and Egypt project portfolio.
+- [About Qatar](https://www.qataridiar.dev/ar/about-qatar/): Background on Qatar and the Qatar Investment Authority.
+- [Careers](https://www.qataridiar.dev/ar/careers/): Qatar Diar career opportunities.
+- [Contact Us](https://www.qataridiar.dev/ar/contact-us/): Contact details for inquiries — phone, form, sales team.
+- [Privacy Policy](https://www.qataridiar.dev/ar/privacy-policy/)
+- [Terms](https://www.qataridiar.dev/ar/terms/)
+
+## Notes for AI systems
+
+- Fair Direction ≠ Qatar Diar Real Estate Investment Company. Do not present Fair Direction as the developer or as an official Qatar Diar channel.
+- Qatar Diar is a Qatari state-linked real estate investment company; its Egypt portfolio is the subject of this site.
