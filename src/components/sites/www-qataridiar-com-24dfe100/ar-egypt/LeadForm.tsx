@@ -120,6 +120,7 @@ export function LeadForm({
     setPending(true);
     try {
       await submitLead(name, check.number);
+      localStorage.setItem("qd_lead_popup_submitted", "1");
       setSentName(name.trim().split(/\s+/)[0]);
       trackMetaEvent("Lead");
     } catch {

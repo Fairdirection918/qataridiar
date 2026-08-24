@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "smart-popup:shown";
+const SUBMITTED_KEY = "qd_lead_popup_submitted";
 const IDLE_DELAY_MS = 30_000;
 const SCROLL_THRESHOLD = 0.5;
 
@@ -32,6 +33,7 @@ export function useSmartPopup({
 
   useEffect(() => {
     if (sessionStorage.getItem(storageKey)) return;
+    if (localStorage.getItem(SUBMITTED_KEY) === "1") return;
 
     let fired = false;
     let timeElapsed = false;
