@@ -1,0 +1,13 @@
+# City Gate New Cairo by Qatari Diar - Real Estate Portfolio
+
+Authorized sales agent site powered by Fair Direction for City Gate New Cairo by Qatari Diar.
+
+## Contact Info
+- Phone: +201515124909
+- Address: القاهرة الجديدة، مصر
+- Domain: https://www.qataridiar.dev
+
+## Project Details
+Independent, verified representation of luxury property listings, payment options, and locations.
+- **Sitemap**: https://www.qataridiar.dev/sitemap.xml
+- **Status**: Secure HTTPS, optimized SEO, and structured schema markers present.
