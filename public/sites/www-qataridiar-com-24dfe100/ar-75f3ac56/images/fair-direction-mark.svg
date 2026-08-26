@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 104" role="img" aria-label="Fair Direction">
+  <defs>
+    <linearGradient id="fdGrad" x1="4" y1="100" x2="100" y2="4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1D4ED8" />
+      <stop offset="1" stop-color="#F97316" />
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="98" height="98" rx="24" fill="#FFFFFF" />
+  <rect x="3" y="3" width="98" height="98" rx="24" fill="none" stroke="#E2E8F0" stroke-width="2" />
+  <circle cx="27" cy="27" r="5" fill="#F97316" />
+  <g transform="rotate(-45 52 52)">
+    <rect x="22" y="47" width="36" height="10" rx="5" fill="url(#fdGrad)" />
+    <polygon points="56,30 84,52 56,74" fill="url(#fdGrad)" />
+  </g>
+</svg>

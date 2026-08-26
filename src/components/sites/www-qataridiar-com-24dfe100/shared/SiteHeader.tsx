@@ -24,12 +24,12 @@ export function SiteHeader() {
 
     // gac footer marker: {/* gac:start:footer-ar */}{/* gac:end:footer-ar */}
     <>
-      <header className="absolute top-0 right-0 left-0 z-[97] flex w-full justify-between p-[40px] max-[767px]:p-[20px]">
+      <header className="absolute top-9 right-0 left-0 z-[97] flex w-full justify-between p-[40px] max-[767px]:p-[20px]">
         <div>
           <Link href="/" rel="home" className="inline-block">
             <Image
-              src={img("logo.svg")}
-              alt="الرئيسية"
+              src={img("fair-direction-mark.svg")}
+              alt="Fair Direction"
               width={104}
               height={104}
               className="max-[767px]:max-w-[73px]"

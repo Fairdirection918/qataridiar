@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 104" role="img" aria-label="Fair Direction">
+  <circle cx="52" cy="52" r="49" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2" />
+  <circle cx="27" cy="27" r="5" fill="#FFFFFF" fill-opacity="0.75" />
+  <g transform="rotate(-45 52 52)">
+    <rect x="22" y="47" width="36" height="10" rx="5" fill="#FFFFFF" />
+    <polygon points="56,30 84,52 56,74" fill="#FFFFFF" />
+  </g>
+</svg>

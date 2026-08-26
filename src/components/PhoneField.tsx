@@ -1,5 +1,7 @@
 "use client";
 
+// gac footer marker: {/* gac:start:footer-shared */}{/* gac:end:footer-shared */} — real disclosure lives on the parent LeadForm/ContactForm
+
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from "react";
 import intlTelInput from "intl-tel-input";
 import type { Iti } from "intl-tel-input";

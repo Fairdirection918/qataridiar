@@ -1,5 +1,6 @@
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
+import { TrustBar } from "./TrustBar";
 
 export function PageShell({
   children,
@@ -11,6 +12,7 @@ export function PageShell({
   return (
     // gac footer marker: {/* gac:start:footer-ar */}{/* gac:end:footer-ar */}
     <div className={`qd-root ${darkHeader ? "qd-interior" : ""}`}>
+      <TrustBar />
       <SiteHeader />
       <main className="relative z-0 w-full min-h-screen">{children}</main>
       <SiteFooter />

@@ -15,8 +15,8 @@ export function SiteFooter() {
         <div className="min-w-[190px] grow">
           <Link href="/">
             <Image
-              src={img("logo-footer.png")}
-              alt="الرئيسية"
+              src={img("fair-direction-mark-white.svg")}
+              alt="Fair Direction"
               width={120}
               height={120}
             />
