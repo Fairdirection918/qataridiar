@@ -4,19 +4,46 @@ import Link from "next/link";
 import { useState } from "react";
 import { trackMetaEvent } from "@/lib/meta-pixel";
 
+const TEXT = {
+  en: {
+    defaultTitle: "Send a Message",
+    firstName: "First Name",
+    lastName: "Last Name",
+    email: "Email Address",
+    message: "Message",
+    sentNotice: "Thank you for reaching out. Your message has been received (demo).",
+    submit: "Submit",
+    privacyHref: "/en/privacy-policy",
+  },
+  ar: {
+    defaultTitle: "أرسل رسالة",
+    firstName: "الاسم",
+    lastName: "اسم العائلة",
+    email: "البريد الإلكتروني",
+    message: "الرسالة",
+    sentNotice: "شكراً لتواصلك. تم استلام رسالتك (عرض تجريبي).",
+    submit: "إرسال",
+    privacyHref: "/ar/privacy-policy",
+  },
+} as const;
+
 // gac disclosure marker: {/* gac:start:disclosure-ar */}{/* gac:end:disclosure-ar */}
 export function ContactForm({
-  title = "أرسل رسالة",
+  title,
+  locale = "ar",
 }: {
   title?: string;
+  locale?: "en" | "ar";
 }) {
   const [sent, setSent] = useState(false);
+  const t = TEXT[locale];
+  const resolvedTitle = title ?? t.defaultTitle;
 
   const fields = [
-    { name: "first_name", label: "الاسم", type: "text", required: true },
-    { name: "last_name", label: "اسم العائلة", type: "text", required: true },
-    { name: "email", label: "البريد الإلكتروني", type: "email", required: true },
-    { name: "message", label: "الرسالة", type: "textarea", required: true },
+    { name: "first_name", label: t.firstName, type: "text", required: true },
+    { name: "last_name", label: t.lastName, type: "text", required: true },
+    { name: "email", label: t.email, type: "email", required: true },
+    { name: "message", label: t.message, type: "textarea", required: true },
   ];
 
   return (
@@ -31,12 +58,10 @@ export function ContactForm({
       }}
     >
       <h2 className="mb-[10px] text-[22px] font-bold text-qd-navy uppercase">
-        {title}
+        {resolvedTitle}
       </h2>
       {sent ? (
-        <p className="text-[15px] text-qd-navy">
-          شكراً لتواصلك. تم استلام رسالتك (عرض تجريبي).
-        </p>
+        <p className="text-[15px] text-qd-navy">{t.sentNotice}</p>
       ) : (
         <>
           {fields.map((f) => (
@@ -66,7 +91,7 @@ export function ContactForm({
           <p className="my-[8px] text-[12px] leading-[20px] text-qd-text">
             By submitting this form, you agree to be contacted by Fair Direction
             regarding Qatar Diar properties, and to our{" "}
-            <Link href="/ar/privacy-policy" className="underline">
+            <Link href={t.privacyHref} className="underline">
               Privacy Policy
             </Link>
             .
@@ -76,7 +101,7 @@ export function ContactForm({
             type="submit"
             className="bg-qd-navy px-[28px] py-[12px] text-[14px] font-bold text-white uppercase transition hover:bg-qd-gold"
           >
-            إرسال
+            {t.submit}
           </button>
         </>
       )}

@@ -5,25 +5,61 @@ import type { ProjectDetail } from "@/types/qataridiar";
 import { LandingDisclosure } from "./LandingDisclosure";
 import { PageShell } from "./PageShell";
 
-export function ProjectDetailView({ project }: { project: ProjectDetail }) {
+const TEXT = {
+  en: {
+    region: "Region",
+    location: "Location",
+    area: "Area",
+    status: "Status",
+    backToProjects: "Back to Projects",
+    inquire: "Inquire",
+    visitWebsite: "Visit Website",
+    projectGallery: "Project Gallery",
+    faqs: "Frequently Asked Questions",
+    projectsHref: "/en/projects",
+    inquireHref: "/en/inquire",
+  },
+  ar: {
+    region: "المنطقة",
+    location: "الموقع",
+    area: "المساحة",
+    status: "الحالة",
+    backToProjects: "العودة للمشاريع",
+    inquire: "إستعلم",
+    visitWebsite: "زيارة الموقع",
+    projectGallery: "صور المشروع",
+    faqs: "الأسئلة الشائعة",
+    projectsHref: "/ar/projects",
+    inquireHref: "/ar/inquire",
+  },
+} as const;
+
+export function ProjectDetailView({
+  project,
+  locale = "ar",
+}: {
+  project: ProjectDetail;
+  locale?: "en" | "ar";
+}) {
+  const t = TEXT[locale];
   const details = [
-    project.region && { label: "المنطقة", value: project.region },
-    project.location && { label: "الموقع", value: project.location },
-    project.area && { label: "المساحة", value: project.area },
-    project.status && { label: "الحالة", value: project.status },
+    project.region && { label: t.region, value: project.region },
+    project.location && { label: t.location, value: project.location },
+    project.area && { label: t.area, value: project.area },
+    project.status && { label: t.status, value: project.status },
   ].filter(Boolean) as { label: string; value: string }[];
 
   return (
 
     // gac footer marker: {/* gac:start:footer-ar */}{/* gac:end:footer-ar */}
-    <PageShell darkHeader>
+    <PageShell darkHeader locale={locale}>
       <section className="relative bg-qd-navy pt-[140px] pb-0 max-[767px]:pt-[110px]">
         <Container>
           <Link
-            href="/ar/projects"
+            href={t.projectsHref}
             className="mb-[30px] inline-block text-[14px] font-bold text-qd-gold uppercase"
           >
-            العودة للمشاريع
+            {t.backToProjects}
           </Link>
           <div className="grid items-end gap-[30px] md:grid-cols-2">
             <div>
@@ -42,10 +78,10 @@ export function ProjectDetailView({ project }: { project: ProjectDetail }) {
               </dl>
               <div className="flex flex-wrap gap-[16px]">
                 <Link
-                  href="/ar/inquire"
+                  href={t.inquireHref}
                   className="bg-qd-gold px-[22px] py-[10px] text-[13px] font-bold text-white uppercase"
                 >
-                  إستعلم
+                  {t.inquire}
                 </Link>
                 {project.website ? (
                   <a
@@ -54,7 +90,7 @@ export function ProjectDetailView({ project }: { project: ProjectDetail }) {
                     rel="noopener noreferrer"
                     className="border border-white px-[22px] py-[10px] text-[13px] font-bold text-white uppercase"
                   >
-                    زيارة الموقع
+                    {t.visitWebsite}
                   </a>
                 ) : null}
               </div>
@@ -96,7 +132,7 @@ export function ProjectDetailView({ project }: { project: ProjectDetail }) {
           {project.gallery.length > 1 ? (
             <div className="mt-[60px]">
               <h2 className="mb-[24px] text-[28px] font-bold text-qd-navy">
-                صور المشروع
+                {t.projectGallery}
               </h2>
               <div className="grid grid-cols-1 gap-[15px] sm:grid-cols-2 lg:grid-cols-3">
                 {project.gallery.map((g) => (
@@ -142,7 +178,7 @@ export function ProjectDetailView({ project }: { project: ProjectDetail }) {
           {project.faqs?.length ? (
             <div className="mt-[60px] max-w-[820px]">
               <h2 className="mb-[24px] text-[28px] font-bold text-qd-navy">
-                الأسئلة الشائعة
+                {t.faqs}
               </h2>
               <div className="space-y-[24px]">
                 {project.faqs.map((f) => (

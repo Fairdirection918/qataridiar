@@ -98,14 +98,17 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
-export function residenceSchema(project: {
-  title: string;
-  summary: string;
-  banner: string;
-  location: string;
-  area: string;
-  route: string;
-}) {
+export function residenceSchema(
+  project: {
+    title: string;
+    summary: string;
+    banner: string;
+    location: string;
+    area: string;
+    route: string;
+  },
+  locale: "en" | "ar" = "ar",
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Residence",
@@ -122,7 +125,7 @@ export function residenceSchema(project: {
       ? {
           additionalProperty: {
             "@type": "PropertyValue",
-            name: "المساحة",
+            name: locale === "en" ? "Area" : "المساحة",
             value: project.area,
           },
         }

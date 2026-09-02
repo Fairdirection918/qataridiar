@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { img } from "@/components/sites/www-qataridiar-com-24dfe100/shared/assets";
-import {
-  FOOTER_COPYRIGHT,
-  FOOTER_MENU,
-  FOOTER_PRIVACY,
-  SOCIAL_LINKS,
-} from "@/components/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/data";
+import * as AR_DATA from "@/components/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/data";
+import * as EN_DATA from "@/components/sites/www-qataridiar-com-24dfe100/en/data";
 
-export function SiteFooter() {
+export function SiteFooter({ locale = "ar" }: { locale?: "en" | "ar" }) {
+  const D = locale === "en" ? EN_DATA : AR_DATA;
+  const { FOOTER_COPYRIGHT, FOOTER_MENU, FOOTER_PRIVACY, SOCIAL_LINKS } = D;
+  const privacyHref = locale === "en" ? "/en/privacy-policy" : "/ar/privacy-policy";
+  const termsHref = locale === "en" ? "/en/terms" : "/ar/terms";
   return (
     <footer className="qd-footer bg-qd-navy pt-[90px]">
       <div className="mx-auto flex max-w-[1280px] justify-between px-[40px] pt-0 pb-[70px]">
         <div className="min-w-[190px] grow">
-          <Link href="/">
+          <Link href={locale === "en" ? "/en" : "/"}>
             <Image
               src={img("fair-direction-mark-white.svg")}
               alt="Fair Direction"
@@ -61,11 +61,11 @@ export function SiteFooter() {
           Estate Investment.
         </p>
         <p className="mt-[8px] text-[12px] leading-[20px] text-white/70">
-          <Link href="/ar/privacy-policy" className="underline">
+          <Link href={privacyHref} className="underline">
             Privacy Policy
           </Link>
           {" · "}
-          <Link href="/ar/terms" className="underline">
+          <Link href={termsHref} className="underline">
             Terms & Disclaimer
           </Link>
         </p>

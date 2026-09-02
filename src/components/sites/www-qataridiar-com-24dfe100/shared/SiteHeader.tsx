@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { img } from "@/components/sites/www-qataridiar-com-24dfe100/shared/assets";
-import { MAIN_MENU, SECONDARY_MENU, SOCIAL_LINKS } from "@/components/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/data";
+import * as AR_DATA from "@/components/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/data";
+import * as EN_DATA from "@/components/sites/www-qataridiar-com-24dfe100/en/data";
 
-const PANEL_SOCIAL = SOCIAL_LINKS.filter((s) => s.label !== "Whatsapp");
-
-export function SiteHeader() {
+export function SiteHeader({ locale = "ar" }: { locale?: "en" | "ar" }) {
   const [open, setOpen] = useState(false);
+  const D = locale === "en" ? EN_DATA : AR_DATA;
+  const { MAIN_MENU, SECONDARY_MENU, SOCIAL_LINKS } = D;
+  const PANEL_SOCIAL = SOCIAL_LINKS.filter((s) => s.label !== "Whatsapp");
 
   useEffect(() => {
     if (!open) return;
@@ -26,7 +28,7 @@ export function SiteHeader() {
     <>
       <header className="absolute top-9 right-0 left-0 z-[97] flex w-full justify-between p-[40px] max-[767px]:p-[20px]">
         <div>
-          <Link href="/" rel="home" className="inline-block">
+          <Link href={locale === "en" ? "/en" : "/"} rel="home" className="inline-block">
             <Image
               src={img("fair-direction-mark.svg")}
               alt="Fair Direction"
@@ -43,7 +45,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          aria-label="القائمة"
+          aria-label={locale === "en" ? "Menu" : "القائمة"}
           aria-expanded={open}
           data-open={open}
           onClick={() => setOpen(true)}
@@ -105,6 +107,15 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
+
+        <div className="mb-[20px]">
+          <Link
+            href={locale === "en" ? "/ar" : "/en"}
+            className="text-[14px] font-bold text-qd-gold uppercase"
+          >
+            {locale === "en" ? "العربية" : "English"}
+          </Link>
+        </div>
 
         <div className="mt-[95px] max-[1520px]:mt-0">
           {PANEL_SOCIAL.map((s) => (

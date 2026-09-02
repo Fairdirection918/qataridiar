@@ -1,11 +1,14 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "gac_cookie_notice_dismissed";
 
 export function CookieNotice() {
   const [visible, setVisible] = useState(true);
+  const pathname = usePathname();
+  const privacyHref = pathname?.startsWith("/en") ? "/en/privacy-policy" : "/ar/privacy-policy";
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -34,7 +37,7 @@ export function CookieNotice() {
       >
         <p className="mb-[12px] text-[14px] leading-[24px]">
           We use cookies to improve your experience on this website.{" "}
-          <a href="/ar/privacy-policy" className="underline">
+          <a href={privacyHref} className="underline">
             Privacy Policy
           </a>
         </p>

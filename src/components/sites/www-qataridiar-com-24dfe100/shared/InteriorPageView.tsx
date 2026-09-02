@@ -7,35 +7,61 @@ import { LandingDisclosure } from "./LandingDisclosure";
 import { PageShell } from "./PageShell";
 import { ContactForm } from "./ContactForm";
 
+const TEXT = {
+  en: {
+    backToHome: "Back to Home",
+    viewOnMap: "View on Map",
+    viewList: "View List",
+    projectsMapAlt: "Projects Map",
+    latestNewsIntro: "Latest news and press releases about Qatar Diar",
+    visitWebsite: "Visit Website",
+    sendMessage: "Send a Message",
+    inquire: "Inquire",
+    home: "Home",
+  },
+  ar: {
+    backToHome: "العودة للرئيسية",
+    viewOnMap: "عرض على الخريطة",
+    viewList: "عرض القائمة",
+    projectsMapAlt: "خريطة المشاريع",
+    latestNewsIntro: "آخر الأخبار والبيانات الصحفية عن شركة الديار القطرية",
+    visitWebsite: "زيارة الموقع",
+    sendMessage: "أرسل رسالة",
+    inquire: "استعلام",
+    home: "الرئيسية",
+  },
+} as const;
+
 export function InteriorPageView({ page }: { page: InteriorPage }) {
+  const locale = page.key.startsWith("en") ? "en" : "ar";
+  const t = TEXT[locale];
+  const suffix = page.key.replace(/^(ar|en)-/, "");
+
   if (page.notFound) {
     return (
       // gac footer marker: {/* gac:start:footer-ar */}{/* gac:end:footer-ar */}
-      <PageShell darkHeader>
+      <PageShell darkHeader locale={locale}>
         <section className="bg-qd-cream px-[15px] py-[200px] text-center">
           <h1 className="mb-[20px] text-[35px] font-bold text-qd-navy">
             {page.title}
           </h1>
           <p className="mb-[30px] text-qd-text">{page.intro}</p>
-          <Link href="/" className="font-bold text-qd-gold uppercase">
-            العودة للرئيسية
+          <Link href={locale === "en" ? "/en" : "/"} className="font-bold text-qd-gold uppercase">
+            {t.backToHome}
           </Link>
         </section>
       </PageShell>
     );
   }
 
-  const isProjects = page.key === "ar-projects";
-  const isMap = page.key === "ar-projects-map";
-  const isMedia = page.key === "ar-media";
-  const isBusiness = page.key === "ar-other-businesses";
-  const isForm =
-    page.key === "ar-contact-us" ||
-    page.key === "ar-inquire" ||
-    page.key === "ar-request-access-information";
+  const isProjects = suffix === "projects";
+  const isMap = suffix === "projects-map";
+  const isMedia = suffix === "media";
+  const isBusiness = suffix === "other-businesses";
+  const isForm = suffix === "contact-us" || suffix === "inquire" || suffix === "request-access-information";
 
   return (
-    <PageShell darkHeader>
+    <PageShell darkHeader locale={locale}>
       <InteriorBanner
         title={page.title}
         subtitle={page.subtitle}
@@ -87,7 +113,7 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
                     href={page.mapLink}
                     className="text-[14px] font-bold text-qd-gold uppercase"
                   >
-                    عرض على الخريطة
+                    {t.viewOnMap}
                   </Link>
                 </div>
               ) : null}
@@ -122,17 +148,17 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
             <div className="space-y-[40px]">
               <div className="text-center">
                 <Link
-                  href={page.mapLink || "/ar/projects"}
+                  href={page.mapLink || (locale === "en" ? "/en/projects" : "/ar/projects")}
                   className="text-[14px] font-bold text-qd-gold uppercase"
                 >
-                  عرض القائمة
+                  {t.viewList}
                 </Link>
               </div>
               <div className="mx-auto max-w-[997px]">
                 <div className="relative aspect-[997/650]">
                   <Image
                     src="/sites/www-qataridiar-com-24dfe100/ar-75f3ac56/images/map-gcc.png"
-                    alt="خريطة المشاريع"
+                    alt={t.projectsMapAlt}
                     fill
                     className="object-contain"
                     sizes="100vw"
@@ -146,7 +172,7 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
             <>
               {page.intro ? null : (
                 <p className="mb-[40px] max-w-[720px] text-[16px] leading-[28px] text-qd-text">
-                  آخر الأخبار والبيانات الصحفية عن شركة الديار القطرية
+                  {t.latestNewsIntro}
                 </p>
               )}
               <div className="grid grid-cols-1 gap-[30px] sm:grid-cols-2 lg:grid-cols-3">
@@ -214,7 +240,7 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
                       rel="noopener noreferrer"
                       className="text-[14px] font-bold text-qd-gold uppercase"
                     >
-                      {b.cta || "زيارة الموقع"}
+                      {b.cta || t.visitWebsite}
                     </a>
                   </div>
                 </div>
@@ -280,7 +306,8 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
           {isForm ? (
             <div className="mt-[40px] grid gap-[50px] lg:grid-cols-2">
               <ContactForm
-                title={page.key === "ar-inquire" ? "استعلام" : "أرسل رسالة"}
+                title={suffix === "inquire" ? t.inquire : t.sendMessage}
+                locale={locale}
               />
               {page.paragraphs && page.paragraphs.length > 1 ? (
                 <div className="space-y-[12px] text-[15px] leading-[26px] text-qd-text">
@@ -297,7 +324,7 @@ export function InteriorPageView({ page }: { page: InteriorPage }) {
       </section>
 
       {/* gac:start:disclosure-ar */}
-      {isForm || isProjects || isMap || page.key === "ar-about-us" ? (
+      {isForm || isProjects || isMap || suffix === "about-us" ? (
         <LandingDisclosure />
       ) : null}
       {/* gac:end:disclosure-ar */}
